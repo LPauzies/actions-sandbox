@@ -43,3 +43,14 @@ jobs:
           message: |
             Done !
           comment_tag: "building-${{ github.run_id }}"
+          
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: print GITHUB
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: | 
+          echo "$GITHUB_CONTEXT"
