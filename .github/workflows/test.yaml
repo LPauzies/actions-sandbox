@@ -1,0 +1,20 @@
+name: Test
+
+on:
+  issue_comment:
+    types: [ created ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/build')
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout the given branch
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+
+      - name: Echo something
+        run: |
+          echo "The current branch is ${{ github.ref }}"
