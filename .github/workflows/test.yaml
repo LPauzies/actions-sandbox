@@ -20,7 +20,7 @@ jobs:
         uses: thollander/actions-comment-pull-request@v2
         with:
           message: |
-            ![Loading](https://tenor.com/fr/view/loading-gif-10219845) Building...
+            ![Loading](./.github/resources/loading.gif) Building...
           comment_tag: building
 
       - name: Echo something
