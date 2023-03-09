@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
         name: Checkout the given branch
         with:
-          ref: ${{ github.ref }}
+          ref: master
           fetch-depth: 0
           
       - name: print GITHUB
@@ -21,6 +21,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: | 
           echo "$GITHUB_CONTEXT"
+          echo ${{ github.ref }}
           
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v2
