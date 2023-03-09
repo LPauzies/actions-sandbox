@@ -10,6 +10,11 @@ jobs:
     
     if: github.event.issue.pull_request && contains(github.event.comment.body, '/test')
     steps:
+      - name: Get head_ref for pull_request
+        run: |
+          content=`curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GH_REPO_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" ${{ github.event.issue.pull_request.url }}`
+          echo $content
+    
       - uses: actions/checkout@v3
         name: Checkout the given branch
         with:
