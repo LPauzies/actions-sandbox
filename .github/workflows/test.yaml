@@ -20,8 +20,10 @@ jobs:
           fetch-depth: 0
           
       - name: print GITHUB
-        run: |
-          echo ${{ toJSON(github) }}
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: | 
+          echo "$GITHUB_CONTEXT"
           echo ${{ env.test }}
           
       - name: Comment PR
