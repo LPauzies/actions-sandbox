@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions: read-all|write-all
+    
     if: github.event.issue.pull_request && contains(github.event.comment.body, '/build')
     steps:
       - uses: actions/checkout@v3
