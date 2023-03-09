@@ -3,13 +3,15 @@ name: Test
 on:
   issue_comment:
     types: [ created ]
-  workflow_dispatch:
-
+    
+env:
+  test: $(openssl rand -hex 20)
+    
 jobs:
   build:
     runs-on: ubuntu-latest
     
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/build')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/test')
     steps:
       - uses: actions/checkout@v3
         name: Checkout the given branch
@@ -17,12 +19,17 @@ jobs:
           ref: ${{ github.ref }}
           fetch-depth: 0
           
+      - name: print GITHUB
+        run: |
+          echo ${{ toJSON(github) }}
+          echo ${{ env.test }}
+          
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v2
         with:
           message: |
-            ![Loading](./.github/resources/loading.gif) Building...
-          comment_tag: building
+            ![Loading](.github/resources/loading.gif) Building...
+          comment_tag: "building-${{ env.test }}"
 
       - name: Echo something
         run: |
@@ -37,4 +44,4 @@ jobs:
         with:
           message: |
             Done !
-          comment_tag: building
+          comment_tag: "building-${{ env.test }}"
