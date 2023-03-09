@@ -14,7 +14,25 @@ jobs:
         with:
           ref: ${{ github.ref }}
           fetch-depth: 0
+          
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            ![Loading](https://tenor.com/fr/view/loading-gif-10219845) Building...
+          comment_tag: building
 
       - name: Echo something
         run: |
           echo "The current branch is ${{ github.ref }}"
+          
+      - name: Sleep
+        run: |
+          sleep 10
+          
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            Done !
+          comment_tag: building
