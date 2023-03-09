@@ -1,19 +1,6 @@
 name: Test
 
 on:
-  pull_request:
-    types: [ opened, synchronize, reopened ]
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-          - info
-          - warning
-          - debug
   issue_comment:
     types: [ created ]
 
