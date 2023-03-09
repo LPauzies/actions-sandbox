@@ -13,7 +13,6 @@ jobs:
       - uses: actions/checkout@v3
         name: Checkout the given branch
         with:
-          ref: ${{ github.ref }}
           fetch-depth: 0
           
       - name: print GITHUB
