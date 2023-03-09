@@ -4,9 +4,6 @@ on:
   issue_comment:
     types: [ created ]
     
-env:
-  test: $(openssl rand -hex 20)
-    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,14 +21,13 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: | 
           echo "$GITHUB_CONTEXT"
-          echo ${{ env.test }}
           
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v2
         with:
           message: |
             ![Loading](.github/resources/loading.gif) Building...
-          comment_tag: "building-${{ env.test }}"
+          comment_tag: "building-${{ github.run_id }}"
 
       - name: Echo something
         run: |
@@ -46,4 +42,4 @@ jobs:
         with:
           message: |
             Done !
-          comment_tag: "building-${{ env.test }}"
+          comment_tag: "building-${{ github.run_id }}"
