@@ -1,15 +1,13 @@
 name: Test
 
 on:
-  issue_comment:
+  pull_request_review_comment:
     types: [ created ]
-  pull_request:
-    types: [created, synchronize, closed]
     
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/test')
     steps:
       - uses: actions/checkout@v3
         name: Checkout the given branch
