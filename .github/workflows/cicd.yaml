@@ -2,7 +2,8 @@ name: CICD Engine
 
 on:
   pull_request:
-    types: synchronize
+    types:
+      - synchronize
     branches:
       - "topic/**"
       - "master"
