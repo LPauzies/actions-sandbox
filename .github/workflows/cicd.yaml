@@ -2,6 +2,10 @@ name: CICD Engine
 
 on:
   pull_request:
+    types:
+      - synchronize
+      - opened
+      - reopened
     branches:
       - "topic/**"
       - "master"
