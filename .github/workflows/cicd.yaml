@@ -21,9 +21,17 @@ jobs:
       my_env: ${{ steps.setenv.outputs.my_env }}
     runs-on: ubuntu-latest
     steps:
-      - id: setenv
+      - name: Retrieve branch name
+        id: setenv
         run: |
-          echo "my_env=dev" >> "$GITHUB_OUTPUT"
+          "$STR" == *"$SUB"*
+          # Synchronize case
+          if [[ "${{ github.head_ref }}" == "deploy"* ]]; then
+            echo "my_env=deploy" >> $GITHUB_OUTPUT
+          # Push case
+          else
+            echo "my_env=master" >> $GITHUB_OUTPUT
+          fi
 
   contexts:
     runs-on: ubuntu-latest
