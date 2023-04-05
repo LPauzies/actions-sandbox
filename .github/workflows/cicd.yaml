@@ -9,9 +9,11 @@ on:
     branches:
       - "topic/**"
       - "master"
+      - "deploy"
   push:
     branches:
       - "master"
+      - "deploy"
 
 jobs:
   env-definer:
