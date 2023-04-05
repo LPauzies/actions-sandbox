@@ -24,13 +24,11 @@ jobs:
       - name: Retrieve branch name
         id: setenv
         run: |
-          # Synchronize case
-          if [[ "${{ github.head_ref }}" == "deploy"* ]]; then
-            echo "my_env=deploy" >> $GITHUB_OUTPUT
-          # Push case
-          else
-            echo "my_env=master" >> $GITHUB_OUTPUT
-          fi
+          # Synchronize case else Push casee
+          [[ ! -z "${{ github.head_ref }}" ]] && BRANCH="${{ github.head_ref }}" || BRANCH="${{ github.ref }}"
+          [[ "$BRANCH" == "deploy"* ]] && echo "my_env=deploy" >> $GITHUB_OUTPUT || echo "my_env=master" >> $GITHUB_OUTPUT
+          echo $BRANCH
+          echo $GITHUB_OUTPUT
 
   contexts:
     runs-on: ubuntu-latest
@@ -84,8 +82,8 @@ jobs:
           ref: ${{ github.ref }}
           fetch-depth: 0
 
-      - name: Echo
-        run: echo "toto"
+      - name: Echo env
+        run: echo ${{ needs.env-definer.outputs.my_env }}
 
       - name: Echo secrets
         run: |
