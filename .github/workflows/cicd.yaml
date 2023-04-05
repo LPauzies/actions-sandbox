@@ -8,12 +8,12 @@ on:
       - reopened
     branches:
       - "topic/**"
-      - "master"
-      - "deploy"
+      - "develop"
+      - "stable"
   push:
     branches:
-      - "master"
-      - "deploy"
+      - "develop"
+      - "stable"
 
 jobs:
   env-definer:
