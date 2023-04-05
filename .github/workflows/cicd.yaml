@@ -24,7 +24,6 @@ jobs:
       - name: Retrieve branch name
         id: setenv
         run: |
-          "$STR" == *"$SUB"*
           # Synchronize case
           if [[ "${{ github.head_ref }}" == "deploy"* ]]; then
             echo "my_env=deploy" >> $GITHUB_OUTPUT
