@@ -26,7 +26,7 @@ jobs:
         run: |
           # Synchronize case else Push casee
           [[ ! -z "${{ github.head_ref }}" ]] && BRANCH="${{ github.head_ref }}" || BRANCH="${{ github.ref }}"
-          [[ "$BRANCH" == "deploy"* ]] && echo "my_env=dev" >> $GITHUB_OUTPUT || echo "my_env=master" >> $GITHUB_OUTPUT
+          [[ "$BRANCH" == "topic/"* || "$BRANCH" == "develop"* ]] && echo "my_env=dev" >> $GITHUB_OUTPUT || echo "my_env=master" >> $GITHUB_OUTPUT
           echo $BRANCH
           echo $GITHUB_OUTPUT
 
