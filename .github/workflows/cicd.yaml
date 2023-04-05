@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [contexts, env-definer]
     environment:
-      name: ${{ needs.set_environment.outputs.my_env }}
+      name: ${{ needs.env-definer.outputs.my_env }}
 
     name: Perform deployment
 
