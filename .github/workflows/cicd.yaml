@@ -8,12 +8,12 @@ on:
       - reopened
     branches:
       - "topic/**"
-      - "master"
-      - "deploy"
+      - "develop"
+      - "stable"
   push:
     branches:
-      - "master"
-      - "deploy"
+      - "develop"
+      - "stable"
 
 jobs:
   env-definer:
@@ -24,9 +24,9 @@ jobs:
       - name: Retrieve branch name
         id: setenv
         run: |
-          # Synchronize case else Push casee
+          # Synchronize case else Push case
           [[ ! -z "${{ github.head_ref }}" ]] && BRANCH="${{ github.head_ref }}" || BRANCH="${{ github.ref }}"
-          [[ "$BRANCH" == "topic/"* || "$BRANCH" == "develop"* ]] && echo "my_env=dev" >> $GITHUB_OUTPUT || echo "my_env=master" >> $GITHUB_OUTPUT
+          [[ "$BRANCH" == *"topic/"* || "$BRANCH" == *"develop"* ]] && echo "my_env=develop" >> $GITHUB_OUTPUT || echo "my_env=stable" >> $GITHUB_OUTPUT
           echo $BRANCH
           echo $GITHUB_OUTPUT
 
