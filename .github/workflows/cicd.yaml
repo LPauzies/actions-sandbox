@@ -22,7 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: setenv
-        run: echo "::set-output name=my_env::dev"
+        run: |
+          echo "my_env=dev" >> "$GITHUB_OUTPUT"
 
   contexts:
     runs-on: ubuntu-latest
@@ -82,5 +83,5 @@ jobs:
       - name: Echo secrets
         run: |
           echo ${{ secrets.SECRET }} >> toto.txt
-          echo ${{ vars.SECRET }} >> toto.txt
+          echo ${{ vars.VARIABLE }} >> toto.txt
           cat toto.txt
