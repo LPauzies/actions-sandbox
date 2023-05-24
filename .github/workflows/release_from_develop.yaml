@@ -1,0 +1,28 @@
+name: Release from Develop
+
+on:
+  workflow_dispatch:
+    inputs:
+      versionTag:
+        description: "Tag for the version (i. e. 2023-01-06)"
+        required: true
+
+jobs:
+  mergedevelop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Merge Develop into Stable with ff-only
+        run: |
+          git --version
+          git fetch --all
+          git checkout stable
+          git log stable..origin/develop  # log the commmits that are on develop but not on stable
+          git merge --ff-only origin/develop
+          git tag ${{ github.event.inputs.versionTag }}
+          git push origin stable
+          git push origin ${{ github.event.inputs.versionTag }}
