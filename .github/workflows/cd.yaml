@@ -1,0 +1,25 @@
+name: CD Engine
+
+on:
+  # On push into "develop" or "stable", trigger build + deployment depending on the branch name
+  # Later we would want to add "production" to allow automatic deployment into production
+  push:
+    branches:
+      - "develop"
+      - "stable"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+
+    steps:
+      - name: Checkout ${{ github.ref }}
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+
+      - name: Echo stuff
+        run: |
+          echo "Deployment OK!"
