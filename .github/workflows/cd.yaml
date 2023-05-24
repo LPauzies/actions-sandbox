@@ -22,4 +22,4 @@ jobs:
 
       - name: Echo stuff
         run: |
-          echo "Deployment OK!"
+          echo "Deployment from ${{ github.ref }}"
